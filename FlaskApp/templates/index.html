@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Chat with GPT-2</h1>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Ask something..." required>
+        <button type="submit">Send</button>
+    </form>
+    <div id="conversation"></div>
+
+    <script>
+        document.getElementById('chat-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const userInput = document.getElementById('user-input').value;
+            const responseElement = document.getElementById('conversation');
+            responseElement.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+            const response = await fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `user_input=${userInput}`,
+            });
+
+            const data = await response.json();
+            responseElement.innerHTML += `<p><strong>Chatbot:</strong> ${data.response}</p>`;
+            document.getElementById('user-input').value = '';
+        };
+    </script>
+</body>
+</html>
+
