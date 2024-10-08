@@ -121,7 +121,7 @@
     // }
 
 async function processUserInput(text) {
-    let apiUrl = document.getElementById("apiUrl").value;
+    let apiUrl = document.getElementById("apiUrl").value + "/chatbot";
     try {
         // Send a POST request to the chatbot API
         const response = await fetch(apiUrl, {
