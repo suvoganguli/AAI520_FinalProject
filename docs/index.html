@@ -59,6 +59,7 @@
 <body>
 
 <div class="chat-container">
+    <div class="user-input"><input type="text" id="apiUrl" placeholder="API url... e.g. https://xxxx-xx-xxx-xx-xxx.ngrok-free.app/chatbot"></div>
     <div class="chat-box" id="chatBox">
         <!-- Chat messages will be appended here -->
     </div>
@@ -76,6 +77,7 @@
             submitMessage(); // Call the submit function
         }
     });
+
 
     async function submitMessage() {
         const userInput = document.getElementById('userMessage');
@@ -117,8 +119,7 @@
     // }
 
 async function processUserInput(text) {
-    const apiUrl = 'https://68cf-35-227-91-247.ngrok-free.app/chatbot'; // Replace with your actual ngrok URL
-
+    let apiUrl = document.getElementById("apiUrl").value;
     try {
         // Send a POST request to the chatbot API
         const response = await fetch(apiUrl, {
