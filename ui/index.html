@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .chat-box {
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: scroll;
+            background-color: #8aa0ba;
+            margin-bottom: 10px;
+        }
+
+        .chat-box p {
+            margin: 5px 0;
+        }
+
+        .user-input {
+            display: flex;
+        }
+
+        .user-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .user-input button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .user-input button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-box" id="chatBox">
+        <!-- Chat messages will be appended here -->
+    </div>
+
+    <div class="user-input">
+        <input type="text" id="userMessage" placeholder="Type your message...">
+        <button onclick="submitMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('userMessage').addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission or page refresh
+            submitMessage(); // Call the submit function
+        }
+    });
+
+    async function submitMessage() {
+        const userInput = document.getElementById('userMessage');
+        const message = userInput.value.trim();
+
+        if (message !== "") {
+            // Add user's message to chat UI
+            addUserMessage(message);
+            // Clear the input field
+            userInput.value = "";
+            // Call the function to process the user's input
+            await processUserInput(message);
+        }
+    }
+
+    function addUserMessage(text) {
+        const chatBox = document.getElementById('chatBox');
+        const userMessage = document.createElement('p');
+        userMessage.textContent = "You: " + text;
+        userMessage.style.fontWeight = "bold";
+        chatBox.appendChild(userMessage);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+
+    // Function to be filled in with bot response logic
+    // function processUserInput(text) {
+    //     // TODO: Implement bot logic
+    //     text = text.toLowerCase()
+    //     if (["hello", "hi"].includes(text)) {
+    //         addBotResponse("Hello! I am a bot.")
+    //     } else if (text.indexOf("what is your name?") > -1) {
+    //         addBotResponse("My name is RoBoT")
+    //     } else if (text === 'open sesame!') {
+    //         addBotResponse("Nice to meet you!")
+    //     } else {
+    //         addBotResponse("Sorry! I am not able to understand you!")
+    //     }
+    //     console.log("Processing user input:", text);
+    // }
+
+async function processUserInput(text) {
+    const apiUrl = 'https://68cf-35-227-91-247.ngrok-free.app/chatbot'; // Replace with your actual ngrok URL
+
+    try {
+        // Send a POST request to the chatbot API
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: text }),  // Send the user input as JSON
+        });
+
+        // Check if the response is ok
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Parse the response JSON
+        const data = await response.json();
+
+        // Check if the bot's response is available
+        if (data.text) {
+            addBotResponse(data.text);  // Call function to update the UI with bot response
+        } else {
+            addBotResponse('Error: No response from the bot.');
+        }
+
+    } catch (error) {
+        console.error('Error during fetch:', error);
+        addBotResponse('Error: Could not connect to the chatbot API.');
+    }
+}
+
+
+    // Function to display bot responses
+    function addBotResponse(text) {
+        const chatBox = document.getElementById('chatBox');
+        const botMessage = document.createElement('p');
+        botMessage.textContent = "Bot: " + text;
+        botMessage.style.color = "blue";
+        chatBox.appendChild(botMessage);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+</script>
+
+</body>
+</html>
