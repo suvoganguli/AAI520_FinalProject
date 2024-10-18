@@ -1,0 +1,5 @@
+flask
+pyngrok
+flask_cors
+transformers
+torch

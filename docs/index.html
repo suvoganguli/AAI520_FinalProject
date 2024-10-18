@@ -121,7 +121,7 @@
     // }
 
 async function processUserInput(text) {
-    let apiUrl = document.getElementById("apiUrl").value + "/chatbot";
+    let apiUrl = document.getElementById("apiUrl").value + "/get_response";
     try {
         // Send a POST request to the chatbot API
         const response = await fetch(apiUrl, {
@@ -129,7 +129,7 @@ async function processUserInput(text) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ text: text }),  // Send the user input as JSON
+            body: JSON.stringify({ user_input: text }),  // Send the user input as JSON
         });
 
         // Check if the response is ok
@@ -141,8 +141,8 @@ async function processUserInput(text) {
         const data = await response.json();
 
         // Check if the bot's response is available
-        if (data.text) {
-            addBotResponse(data.text);  // Call function to update the UI with bot response
+        if (data.response) {
+            addBotResponse(data.response);  // Call function to update the UI with bot response
         } else {
             addBotResponse('Error: No response from the bot.');
         }
