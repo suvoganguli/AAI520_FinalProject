@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from pyngrok import ngrok
-from model import get_response
+from .model import get_response
 import threading
 import time
 from flask_cors import CORS
