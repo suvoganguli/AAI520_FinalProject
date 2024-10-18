@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from pyngrok import ngrok
-from .model import get_response
+from .model import generate_response
 import threading
 import time
 from flask_cors import CORS
@@ -15,7 +15,8 @@ CORS(app, resources={r"/*": {"origins": ["https://kay-q-mich.github.io", "https:
 # Route to get chatbot response
 @app.route('/get_response', methods=['POST'])
 def get_response():
-    user_input = request.form['user_input']
+    data = request.json
+    user_input = data.get("user_input", "")
 
     # Generate response using your chatbot model
     response = generate_response(user_input)
@@ -30,6 +31,3 @@ def run_flask(auth_token, port=5000):
     public_url = ngrok.connect(port)
     print(f" * Ngrok tunnel opened at {public_url}")
     app.run(port=5000)
-
-
-
