@@ -1,6 +1,6 @@
 ## AAI 520 - Natural Language Processing
 ### Chatbot Design
-#### Group 4 - Hani Jaldani, Kay Cheung, Suvo Ganguli
+#### Group 4 - Hani Jandali, Kay Cheung, Suvo Ganguli
 
 ---
 
@@ -11,11 +11,12 @@ Two distinct models were developed and tested during the course of the project. 
 Here is an example conversation using the GPT2 chatbot.
 ![Chatbot GPT2](./images/Chatbot-GPT2-pic.png)
 
-The second model utilized a sequence-to-sequence (seq2seq) architecture, which is particularly well-suited for tasks like machine translation and dialogue generation. This model produced more conversationally appropriate responses, leading to a more dynamic and engaging interaction between the user and the chatbot. The seq2seq model met the project’s expectations by delivering coherent, contextually relevant replies, making it the more successful of the two models.
+The second model utilized a sequence-to-sequence (seq2seq) architecture, which is particularly well-suited for tasks like machine translation and dialogue generation. This model produced more conversationally appropriate responses, leading to a more dynamic and engaging interaction between the user and the chatbot The seq2seq model met the project’s expectations by delivering coherent, contextually relevant replies, albeit with some grammatical mistakes, making it the more successful of the two models.
+
+![Sequence to Sequence Chatbot](./images/Seq2Seq_Sample_Convo.png)
 
 The final implementation was deployed through a web interface designed using Flask, allowing users to interact with the chatbot in real-time. This interface provided an accessible and user-friendly platform for testing the effectiveness of the chatbot, showcasing the practical applications of natural language processing in conversational AI.
 
 ### Relevant Notebooks:
 - Chatbot-GPT2.ipynb - chatbot for method 1
 - Seq2Seq_Chatbot.ipynb - chatbot for method 2
-- 
