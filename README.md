@@ -17,6 +17,8 @@ The second model utilized a sequence-to-sequence (seq2seq) architecture, which i
 
 The final implementation was deployed through a web interface designed using Flask, allowing users to interact with the chatbot in real-time. This interface provided an accessible and user-friendly platform for testing the effectiveness of the chatbot, showcasing the practical applications of natural language processing in conversational AI. The chatbot can be viewed at https://kay-q-mich.github.io/AAI520_FinalProject/. It requires the web server that serves a model to work. The web server needs an api endpoint `/get_response` with an input of the form `{ "user_input": "..." }` and a response of the form `{ "response": "..." }`. The following Google Colab can be used to run the flask app: https://colab.research.google.com/drive/1bDPf7SG5TJq249JnwutgAxrjxjhH8o_o.
 
-### Relevant Notebooks:
+### Relevant Code:
 - Chatbot-GPT2.ipynb - chatbot for method 1
 - Seq2Seq_Chatbot.ipynb - chatbot for method 2
+- FlaskApp/app.py
+- FlaskApp/model.py
