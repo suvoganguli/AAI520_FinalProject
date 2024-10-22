@@ -22,3 +22,4 @@ The final implementation was deployed through a web interface designed using Fla
 - Seq2Seq_Chatbot.ipynb - chatbot for method 2
 - FlaskApp/app.py
 - FlaskApp/model.py
+- docs/index.html
