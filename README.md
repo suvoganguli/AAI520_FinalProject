@@ -1,5 +1,3 @@
-Link: https://github.com/suvoganguli/AAI520_FinalProject
-
 ## AAI 520 - Natural Language Processing
 ### Chatbot Design
 #### Group 4 - Hani Jandali, Kay Cheung, Suvo Ganguli
